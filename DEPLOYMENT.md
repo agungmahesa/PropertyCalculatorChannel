@@ -24,4 +24,8 @@ NEXTAUTH_SECRET="f6e7d8c9b0a1f2e3d4c5b6a7f8e9d0c1"
     - `DIRECT_URL`
     - `NEXTAUTH_SECRET`
 5. Click **Deploy**.
-6. After deployment, run `npx prisma migrate deploy` in Vercel's terminal or locally pointing to Supabase to set up tables.
+6. After deployment, run the following command LOCALLY to set up your tables:
+   ```bash
+   DATABASE_URL="postgresql://postgres:h7CQbtnmpDsWAL0K@db.aamvjrfhihtzvvnpijqa.supabase.co:5432/postgres" npx prisma migrate deploy
+   ```
+   *(Note: This temporarily overrides the pooler URL with the direct URL for migration purposes.)*
