@@ -99,8 +99,10 @@
   --background: #020617;
   --foreground: #F8FAFC;
 
-  --card: #0F172A;
-  --card-foreground: #F8FAFC;
+  --card: #0f172a;
+  /* Slate 900 */
+  --card-foreground: #f8fafc;
+  /* Slate 50 */
 
   --popover: #0F172A;
   --popover-foreground: #F8FAFC;
