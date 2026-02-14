@@ -99,7 +99,7 @@ export default function DeductionItem({
                 <label className="relative inline-flex items-center cursor-pointer">
                     <input
                         type="checkbox"
-                        checked={deduction.enabled}
+                        checked={deduction.isEnabled}
                         onChange={() => onToggle(deduction.id)}
                         className="sr-only peer"
                     />
