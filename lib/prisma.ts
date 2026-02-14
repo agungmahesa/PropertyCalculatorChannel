@@ -1,9 +1,27 @@
 import { PrismaClient } from '@prisma/client';
+import { createClient } from '@libsql/client';
+import { PrismaLibSQL } from '@prisma/adapter-libsql';
+import { Pool } from 'pg';
+import { PrismaPg } from '@prisma/adapter-pg';
 
 const globalForPrisma = globalThis as unknown as {
     prisma: PrismaClient | undefined;
 };
 
-export const prisma = globalForPrisma.prisma ?? new PrismaClient();
+const getPrisma = () => {
+    const url = process.env.DATABASE_URL || '';
+
+    if (url.startsWith('file:') || url.startsWith('libsql:')) {
+        const libsql = createClient({ url });
+        const adapter = new PrismaLibSQL(libsql);
+        return new PrismaClient({ adapter });
+    } else {
+        const pool = new Pool({ connectionString: url });
+        const adapter = new PrismaPg(pool);
+        return new PrismaClient({ adapter });
+    }
+};
+
+export const prisma = globalForPrisma.prisma ?? getPrisma();
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
