@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import {
     BarChart,
     Bar,
@@ -22,6 +23,16 @@ const data = [
 ];
 
 export default function RevenueChart() {
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) {
+        return <div className="h-full w-full min-h-[300px] bg-slate-50 dark:bg-slate-900/50 rounded-lg animate-pulse" />;
+    }
+
     return (
         <div className="h-full w-full min-h-[300px]">
             <ResponsiveContainer width="100%" height="100%">

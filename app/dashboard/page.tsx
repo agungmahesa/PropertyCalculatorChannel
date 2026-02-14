@@ -15,6 +15,8 @@ import { Button } from '@/components/ui/Button';
 import { prisma } from '@/lib/prisma';
 import RevenueChart from '@/components/dashboard/RevenueChart';
 
+export const dynamic = 'force-dynamic';
+
 // KPI Card Component
 const KPICard = ({ title, value, change, trend, icon: Icon }: any) => (
     <Card className="hover:shadow-md transition-shadow">
