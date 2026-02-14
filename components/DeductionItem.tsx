@@ -23,7 +23,7 @@ export default function DeductionItem({
     return (
         <div className={`
       card transition-all
-      ${!deduction.enabled ? 'opacity-50' : ''}
+      ${!deduction.isEnabled ? 'opacity-50' : ''}
     `}>
             {/* Mobile Layout */}
             <div className="flex flex-col gap-3 sm:hidden">
@@ -36,7 +36,7 @@ export default function DeductionItem({
                     <label className="relative inline-flex items-center cursor-pointer">
                         <input
                             type="checkbox"
-                            checked={deduction.enabled}
+                            checked={deduction.isEnabled}
                             onChange={() => onToggle(deduction.id)}
                             className="sr-only peer"
                         />
@@ -77,7 +77,7 @@ export default function DeductionItem({
                             type="number"
                             value={deduction.value}
                             onChange={(e) => onValueChange(deduction.id, parseFloat(e.target.value) || 0)}
-                            disabled={!deduction.enabled}
+                            disabled={!deduction.isEnabled}
                             step={deduction.type === 'percentage' ? '0.1' : '1000'}
                             min="0"
                             max={deduction.type === 'percentage' ? '100' : undefined}
