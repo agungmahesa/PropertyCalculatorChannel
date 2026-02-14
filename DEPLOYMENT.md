@@ -5,15 +5,14 @@ Go to your Supabase Project Settings > Database > Connection String > Prisma.
 Copy the following variables and add them to your `.env` file and Vercel Environment Variables.
 
 ```env
-# Transaction mode (use port 6543)
-DATABASE_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:6543/postgres?pgbouncer=true&connection_limit=1"
+# Transaction mode (Key: DATABASE_URL)
+DATABASE_URL="postgresql://postgres:h7CQbtnmpDsWAL0K@db.aamvjrfhihtzvvnpijqa.supabase.co:6543/postgres?pgbouncer=true&connection_limit=1"
 
-# Session mode (use port 5432)
-DIRECT_URL="postgresql://postgres:[YOUR-PASSWORD]@db.[YOUR-PROJECT-REF].supabase.co:5432/postgres"
+# Session mode (Key: DIRECT_URL)
+DIRECT_URL="postgresql://postgres:h7CQbtnmpDsWAL0K@db.aamvjrfhihtzvvnpijqa.supabase.co:5432/postgres"
 
-# NextAuth Configuration
-NEXTAUTH_SECRET="any-random-long-string"
-NEXTAUTH_URL="https://property-calculator-channel.vercel.app" # Update after deployment
+# NextAuth Configuration (Key: NEXTAUTH_SECRET)
+NEXTAUTH_SECRET="f6e7d8c9b0a1f2e3d4c5b6a7f8e9d0c1" 
 ```
 
 ## Vercel Deployment Steps
