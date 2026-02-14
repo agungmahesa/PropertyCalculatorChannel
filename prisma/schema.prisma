@@ -1,0 +1,93 @@
+// ProfitStay Database Schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  password  String
+  name      String?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  
+  properties Property[]
+  scenarios  Scenario[]
+}
+
+model Property {
+  id          String    @id @default(cuid())
+  name        String
+  totalRooms  Int       @default(10)
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  channels    Channel[]
+  scenarios   Scenario[]
+}
+
+model Channel {
+  id          String    @id @default(cuid())
+  name        String
+  type        String    // "direct" or "ota"
+  propertyId  String
+  property    Property  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  
+  deductionSequence DeductionSequence?
+  scenarios         Scenario[]
+}
+
+model DeductionComponent {
+  id                    String             @id @default(cuid())
+  deductionSequenceId   String
+  deductionSequence     DeductionSequence  @relation(fields: [deductionSequenceId], references: [id], onDelete: Cascade)
+  
+  name                  String             // "OTA Commission", "Tax", "Discount", etc.
+  type                  String             // "percentage" or "fixed"
+  value                 Float              // percentage (0-100) or fixed amount
+  enabled               Boolean            @default(true)
+  order                 Int                // position in sequence
+  
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @updatedAt
+}
+
+model DeductionSequence {
+  id         String               @id @default(cuid())
+  channelId  String               @unique
+  channel    Channel              @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  
+  components DeductionComponent[]
+  
+  createdAt  DateTime             @default(now())
+  updatedAt  DateTime             @updatedAt
+}
+
+model Scenario {
+  id                String   @id @default(cuid())
+  name              String
+  userId            String
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  propertyId        String
+  property          Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  channelId         String
+  channel           Channel  @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  
+  sellingPrice      Float
+  operationalCost   Float
+  netRevenue        Float
+  netProfit         Float
+  profitMargin      Float
+  
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}

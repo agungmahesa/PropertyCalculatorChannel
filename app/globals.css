@@ -1,26 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --font-sans: var(--font-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif;
 
-@theme inline {
+  /* Semantic Colors */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Brand Colors - Indigo & Slate */
+  --primary: #4F46E5;
+  /* Indigo 600 */
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #F1F5F9;
+  /* Slate 100 */
+  --secondary-foreground: #0F172A;
+  /* Slate 900 */
+
+  --accent: #EEF2FF;
+  /* Indigo 50 */
+  --accent-foreground: #4338CA;
+  /* Indigo 700 */
+
+  /* Usage: Destructive actions */
+  --destructive: #E11D48;
+  /* Rose 600 */
+  --destructive-foreground: #FFFFFF;
+
+  /* Usage: Success states */
+  --success: #10B981;
+  /* Emerald 500 */
+  --success-foreground: #ECFDF5;
+
+  /* Usage: Subtext, placeholders */
+  --muted: #F8FAFC;
+  /* Slate 50 */
+  --muted-foreground: #64748B;
+  /* Slate 500 */
+
+  /* Usage: Backgrounds */
+  --background: #F8FAFC;
+  /* Slate 50 */
+  --foreground: #0F172A;
+  /* Slate 900 */
+
+  /* Usage: Cards, Modals */
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
+
+  /* Usage: Borders */
+  --border: #E2E8F0;
+  /* Slate 200 */
+  --input: #E2E8F0;
+  --ring: #6366F1;
+  /* Indigo 500 */
+
+  --radius: 0.75rem;
+  /* 12px standard radius */
+}
+
+/* Dark Mode - Optional Support base */
+.dark {
+  --background: #020617;
+  --foreground: #F8FAFC;
+
+  --card: #0F172A;
+  --card-foreground: #F8FAFC;
+
+  --popover: #0F172A;
+  --popover-foreground: #F8FAFC;
+
+  --primary: #6366F1;
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #1E293B;
+  --secondary-foreground: #F8FAFC;
+
+  --muted: #1E293B;
+  --muted-foreground: #94A3B8;
+
+  --accent: #1E1B4B;
+  --accent-foreground: #818CF8;
+
+  --destructive: #BE123C;
+  --destructive-foreground: #FFFFFF;
+
+  --border: #1E293B;
+  --input: #1E293B;
+  --ring: #818CF8;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+
+  /* Card Component */
+  .card {
+    @apply bg-card text-card-foreground rounded-lg border shadow-sm transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply hover:shadow-md hover:border-gray-300 dark:hover:border-slate-700;
+  }
+
+  /* Button Components */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background;
+    height: 2.5rem;
+    /* 40px */
+    padding: 0 1rem;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-indigo-700 shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 shadow-sm;
+  }
+
+  .btn-ghost {
+    @apply hover:bg-slate-100 hover:text-slate-900 text-slate-600;
+  }
+
+  .btn-danger {
+    @apply bg-destructive text-destructive-foreground hover:bg-rose-700 shadow-sm;
+  }
+
+  .btn-sm {
+    height: 2rem;
+    padding: 0 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .btn-lg {
+    height: 3rem;
+    padding: 0 2rem;
+    font-size: 1rem;
+  }
+
+  /* Input Components */
+  .input {
+    @apply flex w-full rounded-lg border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 transition-shadow;
+  }
+
+  /* Badge Component */
+  .badge {
+    @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+  }
+
+  .badge-primary {
+    @apply border-transparent bg-primary text-primary-foreground hover:bg-primary/80;
+  }
+
+  .badge-secondary {
+    @apply border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80;
+  }
+
+  .badge-outline {
+    @apply text-foreground;
+  }
+
+  .badge-success {
+    @apply border-transparent bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400;
+  }
+
+  .badge-warning {
+    @apply border-transparent bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400;
+  }
+
+  .badge-danger {
+    @apply border-transparent bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400;
+  }
+
+  /* Layout Utilities */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .page-header {
+    @apply flex flex-col gap-1 mb-8;
+  }
+
+  .page-title {
+    @apply text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-50;
+  }
+
+  .page-subtitle {
+    @apply text-sm text-muted-foreground;
+  }
 }
