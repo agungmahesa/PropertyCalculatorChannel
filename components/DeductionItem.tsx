@@ -65,7 +65,7 @@ export default function DeductionItem({
                     <select
                         value={deduction.type}
                         onChange={(e) => onTypeChange(deduction.id, e.target.value as 'percentage' | 'fixed')}
-                        disabled={!deduction.enabled}
+                        disabled={!deduction.isEnabled}
                         className="input flex-1 py-2.5 text-base"
                     >
                         <option value="percentage">Percentage</option>
@@ -115,7 +115,7 @@ export default function DeductionItem({
                 <select
                     value={deduction.type}
                     onChange={(e) => onTypeChange(deduction.id, e.target.value as 'percentage' | 'fixed')}
-                    disabled={!deduction.enabled}
+                    disabled={!deduction.isEnabled}
                     className="input w-32 py-2"
                 >
                     <option value="percentage">Percentage</option>
@@ -127,7 +127,7 @@ export default function DeductionItem({
                         type="number"
                         value={deduction.value}
                         onChange={(e) => onValueChange(deduction.id, parseFloat(e.target.value) || 0)}
-                        disabled={!deduction.enabled}
+                        disabled={!deduction.isEnabled}
                         step={deduction.type === 'percentage' ? '0.1' : '1000'}
                         min="0"
                         max={deduction.type === 'percentage' ? '100' : undefined}
