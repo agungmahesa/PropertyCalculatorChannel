@@ -135,9 +135,52 @@ async function main() {
     },
   });
 
+  // Create sample scenarios
+  console.log('Creating sample scenarios...');
+  const scenarios = [
+    {
+      name: 'Standard Weekly agoda',
+      sellingPrice: 1500000,
+      operationalCost: 200000,
+      netRevenue: 1230000,
+      netProfit: 1030000,
+      profitMargin: 68.6,
+      channelId: agodaChannel.id,
+    },
+    {
+      name: 'Direct Weekend',
+      sellingPrice: 1800000,
+      operationalCost: 250000,
+      netRevenue: 1755000,
+      netProfit: 1505000,
+      profitMargin: 83.6,
+      channelId: directChannel.id,
+    },
+    {
+      name: 'Booking.com Promo',
+      sellingPrice: 1200000,
+      operationalCost: 150000,
+      netRevenue: 1020000,
+      netProfit: 870000,
+      profitMargin: 72.5,
+      channelId: bookingChannel.id,
+    }
+  ];
+
+  for (const s of scenarios) {
+    await prisma.scenario.create({
+      data: {
+        ...s,
+        userId: demoUser.id,
+        propertyId: demoProperty.id,
+      }
+    });
+  }
+
   console.log('✅ Database seeded successfully!');
   console.log('Demo user:', demoUser.email);
   console.log('Channels created:', 5);
+  console.log('Scenarios created:', scenarios.length);
 }
 
 main()
