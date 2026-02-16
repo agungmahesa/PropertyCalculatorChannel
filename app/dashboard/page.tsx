@@ -21,17 +21,17 @@ export const dynamic = 'force-dynamic';
 const KPICard = ({ title, value, change, trend, icon: Icon }: any) => (
     <Card className="hover:shadow-md transition-shadow">
         <div className="flex justify-between items-start mb-4">
-            <div className="p-2 bg-indigo-50 dark:bg-indigo-950/30 rounded-lg text-indigo-600 dark:text-indigo-400">
+            <div className="p-2 bg-indigo-50 rounded-lg text-indigo-600">
                 <Icon className="h-5 w-5" />
             </div>
-            <div className={`flex items-center text-xs font-semibold px-2.5 py-1 rounded-full ${trend === 'up' ? 'text-emerald-700 bg-emerald-50 dark:bg-emerald-900/30 dark:text-emerald-400' : 'text-rose-700 bg-rose-50 dark:bg-rose-900/30 dark:text-rose-400'}`}>
+            <div className={`flex items-center text-xs font-semibold px-2.5 py-1 rounded-full ${trend === 'up' ? 'text-emerald-700 bg-emerald-50' : 'text-rose-700 bg-rose-50'}`}>
                 {trend === 'up' ? <ArrowTrendingUpIcon className="h-3 w-3 mr-1" /> : <ArrowTrendingDownIcon className="h-3 w-3 mr-1" />}
                 {change}
             </div>
         </div>
         <div>
-            <p className="text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">{title}</p>
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-50">{value}</h3>
+            <p className="text-sm font-medium text-slate-500 mb-1">{title}</p>
+            <h3 className="text-2xl font-bold text-slate-900">{value}</h3>
         </div>
     </Card>
 );
@@ -74,15 +74,15 @@ export default async function DashboardPage() {
     }).format(totalProfit);
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+        <div className="min-h-screen bg-slate-50">
             <TopNav />
             {/* Main Content Area */}
             <main className="container-custom py-8 space-y-8">
                 {/* Error Banner for Debugging */}
                 {errorInfo && (
-                    <div className="bg-rose-50 dark:bg-rose-900/20 border border-rose-200 dark:border-rose-800 p-4 rounded-xl text-rose-800 dark:text-rose-300 text-sm">
+                    <div className="bg-rose-50 border border-rose-200 p-4 rounded-xl text-rose-800 text-sm">
                         <p className="font-bold mb-1">Database Connection Error (Production Debug):</p>
-                        <code className="bg-rose-100 dark:bg-rose-950/50 p-2 rounded block break-all">{errorInfo}</code>
+                        <code className="bg-rose-100 p-2 rounded block break-all">{errorInfo}</code>
                         <p className="mt-2 text-xs opacity-70 italic">Please check your DATABASE_URL and SSL settings.</p>
                     </div>
                 )}
@@ -90,8 +90,8 @@ export default async function DashboardPage() {
                 {/* Page Header */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
-                        <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Overview</h1>
-                        <p className="text-slate-500 dark:text-slate-400">Welcome back, here's what's happening today.</p>
+                        <h1 className="text-2xl font-bold tracking-tight text-slate-900">Overview</h1>
+                        <p className="text-slate-500">Welcome back, here's what's happening today.</p>
                     </div>
                     <div className="flex gap-2">
                         <Button variant="secondary" size="sm">Export Report</Button>
@@ -150,14 +150,14 @@ export default async function DashboardPage() {
                                 <CardTitle>Channel Alerts</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
-                                <div className="flex items-start gap-3 pb-3 border-b border-slate-100 dark:border-slate-800 last:border-0 last:pb-0">
+                                <div className="flex items-start gap-3 pb-3 border-b border-slate-100 last:border-0 last:pb-0">
                                     <span className="relative flex h-2 w-2 mt-2">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
                                     </span>
                                     <div>
-                                        <p className="text-sm font-medium text-slate-700 dark:text-slate-200">Commission Alert</p>
-                                        <p className="text-xs text-slate-500 dark:text-slate-400">Review your Traveloka settings.</p>
+                                        <p className="text-sm font-medium text-slate-700">Commission Alert</p>
+                                        <p className="text-xs text-slate-500">Review your Traveloka settings.</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-3">
@@ -165,8 +165,8 @@ export default async function DashboardPage() {
                                         <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                                     </span>
                                     <div>
-                                        <p className="text-sm font-medium text-slate-700 dark:text-slate-200">System Ready</p>
-                                        <p className="text-xs text-slate-500 dark:text-slate-400">All channels are synced and active.</p>
+                                        <p className="text-sm font-medium text-slate-700">System Ready</p>
+                                        <p className="text-xs text-slate-500">All channels are synced and active.</p>
                                     </div>
                                 </div>
                             </CardContent>
@@ -186,7 +186,7 @@ export default async function DashboardPage() {
                     </CardHeader>
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm text-left">
-                            <thead className="bg-slate-50 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 font-medium">
+                            <thead className="bg-slate-50 text-slate-500 font-medium">
                                 <tr>
                                     <th className="px-6 py-3">Scenario/Property</th>
                                     <th className="px-6 py-3">Channel</th>
@@ -196,15 +196,15 @@ export default async function DashboardPage() {
                                     <th className="px-6 py-3 text-right">Action</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
+                            <tbody className="divide-y divide-slate-100">
                                 {scenarios.length > 0 ? scenarios.map((scenario) => (
-                                    <tr key={scenario.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
-                                        <td className="px-6 py-4 font-medium text-slate-900 dark:text-slate-200">
+                                    <tr key={scenario.id} className="hover:bg-slate-50/50 transition-colors">
+                                        <td className="px-6 py-4 font-medium text-slate-900">
                                             {scenario.name}
                                             <div className="text-xs font-normal text-slate-500">{(scenario as any).property?.name || 'Hotel'}</div>
                                         </td>
-                                        <td className="px-6 py-4 text-slate-500 dark:text-slate-400">{(scenario as any).channel?.name || 'Direct'}</td>
-                                        <td className="px-6 py-4 text-slate-900 dark:text-slate-200">
+                                        <td className="px-6 py-4 text-slate-500">{(scenario as any).channel?.name || 'Direct'}</td>
+                                        <td className="px-6 py-4 text-slate-900">
                                             {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(scenario.sellingPrice)}
                                         </td>
                                         <td className="px-6 py-4 text-emerald-600 font-medium">

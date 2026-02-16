@@ -106,17 +106,17 @@ export default function CalculatorPage() {
     };
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+        <div className="min-h-screen bg-slate-50">
             <TopNav />
             <main className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
                 {/* Header Section */}
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                     <div>
-                        <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Channel Profit Calculator</h1>
-                        <p className="text-slate-500 dark:text-slate-400">Analyze net profit from OTA bookings.</p>
+                        <h1 className="text-2xl font-bold tracking-tight text-slate-900">Channel Profit Calculator</h1>
+                        <p className="text-slate-500">Analyze net profit from OTA bookings.</p>
                     </div>
-                    <div className="flex flex-wrap gap-2 bg-white dark:bg-slate-900 p-1 rounded-lg border border-slate-200 dark:border-slate-800">
+                    <div className="flex flex-wrap gap-2 bg-white p-1 rounded-lg border border-slate-200">
                         {Object.entries(DEFAULT_TEMPLATES).map(([name, template]) => (
                             <Button
                                 key={name}
@@ -135,7 +135,7 @@ export default function CalculatorPage() {
                                     variant="secondary"
                                     size="sm"
                                     onClick={() => applyTemplate(template)}
-                                    className="px-3 bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-400 border-0"
+                                    className="px-3 bg-indigo-50 text-indigo-700 border-0"
                                 >
                                     {name}
                                 </Button>
@@ -143,14 +143,14 @@ export default function CalculatorPage() {
                                     variant="ghost"
                                     size="sm"
                                     onClick={(e) => handleDeleteChannel(name, e)}
-                                    className="px-1.5 h-8 text-rose-500 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/30 opacity-0 group-hover:opacity-100 transition-opacity"
+                                    className="px-1.5 h-8 text-rose-500 hover:text-rose-600 hover:bg-rose-50 opacity-0 group-hover:opacity-100 transition-opacity"
                                 >
                                     <TrashIcon className="h-3.5 w-3.5" />
                                 </Button>
                             </div>
                         ))}
 
-                        <div className="w-px bg-slate-200 dark:bg-slate-800 mx-1"></div>
+                        <div className="w-px bg-slate-200 mx-1"></div>
                         <Button variant="ghost" size="sm" onClick={handleReset} className="text-slate-500">
                             <ArrowPathIcon className="h-4 w-4" />
                         </Button>
@@ -167,7 +167,7 @@ export default function CalculatorPage() {
                             </CardHeader>
                             <CardContent className="space-y-6">
                                 <div>
-                                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">Selling Price (Gross)</label>
+                                    <label className="block text-sm font-medium text-slate-700 mb-2">Selling Price (Gross)</label>
                                     <CurrencyInput
                                         value={sellingPrice}
                                         onChange={setSellingPrice}
@@ -175,7 +175,7 @@ export default function CalculatorPage() {
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">Operational Cost (CPP)</label>
+                                    <label className="block text-sm font-medium text-slate-700 mb-2">Operational Cost (CPP)</label>
                                     <CurrencyInput
                                         value={operationalCost}
                                         onChange={setOperationalCost}
@@ -194,7 +194,7 @@ export default function CalculatorPage() {
                                 </div>
                                 <div className="flex gap-2">
                                     {!isSaving ? (
-                                        <Button size="sm" variant="ghost" onClick={() => setIsSaving(true)} className="text-indigo-600 dark:text-indigo-400">
+                                        <Button size="sm" variant="ghost" onClick={() => setIsSaving(true)} className="text-indigo-600">
                                             <BookmarkIcon className="h-4 w-4 mr-1" /> Save as Channel
                                         </Button>
                                     ) : (

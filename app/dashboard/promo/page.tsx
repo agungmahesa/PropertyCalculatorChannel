@@ -24,17 +24,17 @@ export default function PromoPage() {
     const result = calculatePromoImpact(normalPrice, operationalCost, discountPercentage, DEFAULT_DEDUCTIONS);
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+        <div className="min-h-screen bg-slate-50">
             <TopNav />
             <main className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
+                        <h1 className="text-3xl font-bold text-slate-900">
                             Promo Simulator
                         </h1>
-                        <p className="mt-1 text-slate-500 dark:text-slate-400">
+                        <p className="mt-1 text-slate-500">
                             Analyze the impact of discounts on your net profit and required volume
                         </p>
                     </div>
@@ -59,7 +59,7 @@ export default function PromoPage() {
                                 onChange={setOperationalCost}
                             />
                             <div className="space-y-2">
-                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                                <label className="block text-sm font-medium text-slate-700">
                                     Planned Discount (%)
                                 </label>
                                 <div className="relative">
@@ -83,30 +83,30 @@ export default function PromoPage() {
                     {/* Left Side: Comparison and Analysis */}
                     <div className="lg:col-span-2 space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <Card className="bg-slate-50 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800">
+                            <Card className="bg-slate-50 border-slate-200">
                                 <CardHeader className="pb-2">
                                     <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Normal Pricing</span>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="text-3xl font-bold text-slate-900 dark:text-white mb-2">{formatIDR(normalPrice)}</div>
-                                    <div className="flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400 font-medium">
+                                    <div className="text-3xl font-bold text-slate-900 mb-2">{formatIDR(normalPrice)}</div>
+                                    <div className="flex items-center gap-2 text-sm text-emerald-600 font-medium">
                                         Profit: {formatIDR(result.normalProfit)}
-                                        <span className="px-1.5 py-0.5 bg-emerald-100 dark:bg-emerald-900/30 rounded text-xs font-bold">
+                                        <span className="px-1.5 py-0.5 bg-emerald-100 rounded text-xs font-bold">
                                             {formatPercentage((result.normalProfit / normalPrice) * 100, 1)}
                                         </span>
                                     </div>
                                 </CardContent>
                             </Card>
 
-                            <Card className="bg-indigo-50 dark:bg-indigo-900/20 border-indigo-100 dark:border-indigo-900/50">
+                            <Card className="bg-indigo-50 border-indigo-100">
                                 <CardHeader className="pb-2">
                                     <span className="text-xs font-bold uppercase tracking-wider text-indigo-500">Discounted Pricing</span>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-2">{formatIDR(result.discountedPrice)}</div>
+                                    <div className="text-3xl font-bold text-indigo-600 mb-2">{formatIDR(result.discountedPrice)}</div>
                                     <div className="flex items-center gap-2 text-sm text-indigo-500 font-medium">
                                         Profit: {formatIDR(result.discountedProfit)}
-                                        <span className="px-1.5 py-0.5 bg-indigo-100 dark:bg-indigo-900/30 rounded text-xs font-bold">
+                                        <span className="px-1.5 py-0.5 bg-indigo-100 rounded text-xs font-bold">
                                             {formatPercentage((result.discountedProfit / result.discountedPrice) * 100, 1)}
                                         </span>
                                     </div>
@@ -121,14 +121,14 @@ export default function PromoPage() {
                                 <CardDescription>Direct financial consequences of the discount</CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-0 p-0">
-                                <div className="divide-y divide-slate-100 dark:divide-slate-800">
+                                <div className="divide-y divide-slate-100">
                                     <div className="flex items-center justify-between p-6">
                                         <div className="flex items-center gap-4">
-                                            <div className="p-3 bg-rose-100 dark:bg-rose-900/30 rounded-xl text-rose-600">
+                                            <div className="p-3 bg-rose-100 rounded-xl text-rose-600">
                                                 <ArrowTrendingDownIcon className="h-6 w-6" />
                                             </div>
                                             <div>
-                                                <div className="font-bold text-slate-900 dark:text-white">Profit Drop / Room</div>
+                                                <div className="font-bold text-slate-900">Profit Drop / Room</div>
                                                 <p className="text-sm text-slate-500">Total revenue loss per booking</p>
                                             </div>
                                         </div>
@@ -140,11 +140,11 @@ export default function PromoPage() {
 
                                     <div className="flex items-center justify-between p-6">
                                         <div className="flex items-center gap-4">
-                                            <div className="p-3 bg-amber-100 dark:bg-amber-900/30 rounded-xl text-amber-600">
+                                            <div className="p-3 bg-amber-100 rounded-xl text-amber-600">
                                                 <ArrowTrendingDownIcon className="h-6 w-6" />
                                             </div>
                                             <div>
-                                                <div className="font-bold text-slate-900 dark:text-white">Margin Reduction</div>
+                                                <div className="font-bold text-slate-900">Margin Reduction</div>
                                                 <p className="text-sm text-slate-500">Percentage points decrease</p>
                                             </div>
                                         </div>
@@ -156,11 +156,11 @@ export default function PromoPage() {
 
                                     <div className="flex items-center justify-between p-6">
                                         <div className="flex items-center gap-4">
-                                            <div className="p-3 bg-indigo-100 dark:bg-indigo-900/30 rounded-xl text-indigo-600">
+                                            <div className="p-3 bg-indigo-100 rounded-xl text-indigo-600">
                                                 <ArrowTrendingUpIcon className="h-6 w-6" />
                                             </div>
                                             <div>
-                                                <div className="font-bold text-slate-900 dark:text-white">Required Volume Increase</div>
+                                                <div className="font-bold text-slate-900">Required Volume Increase</div>
                                                 <p className="text-sm text-slate-500">To maintain current total profit</p>
                                             </div>
                                         </div>
@@ -199,27 +199,27 @@ export default function PromoPage() {
 
                         <Card>
                             <CardHeader>
-                                <CardTitle className="text-base font-bold text-slate-900 dark:text-white">📌 Decision Guide</CardTitle>
+                                <CardTitle className="text-base font-bold text-slate-900">📌 Decision Guide</CardTitle>
                             </CardHeader>
                             <CardContent className="pt-0">
                                 <div className="space-y-4">
                                     <div className="flex gap-3">
-                                        <div className="h-5 w-5 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <div className="h-5 w-5 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 mt-0.5">
                                             <span className="text-[10px] font-bold">1</span>
                                         </div>
-                                        <p className="text-sm text-slate-600 dark:text-slate-400">Can you realistically achieve a <strong>{result.additionalRoomsNeeded} room</strong> increase in bookings?</p>
+                                        <p className="text-sm text-slate-600">Can you realistically achieve a <strong>{result.additionalRoomsNeeded} room</strong> increase in bookings?</p>
                                     </div>
                                     <div className="flex gap-3">
-                                        <div className="h-5 w-5 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <div className="h-5 w-5 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 mt-0.5">
                                             <span className="text-[10px] font-bold">2</span>
                                         </div>
-                                        <p className="text-sm text-slate-600 dark:text-slate-400">Consider if the discount will attract <strong>new segments</strong> or just dilute existing ones.</p>
+                                        <p className="text-sm text-slate-600">Consider if the discount will attract <strong>new segments</strong> or just dilute existing ones.</p>
                                     </div>
                                     <div className="flex gap-3">
-                                        <div className="h-5 w-5 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0 mt-0.5">
+                                        <div className="h-5 w-5 rounded-full bg-slate-100 flex items-center justify-center flex-shrink-0 mt-0.5">
                                             <span className="text-[10px] font-bold">3</span>
                                         </div>
-                                        <p className="text-sm text-slate-600 dark:text-slate-400">Check if your <strong>marginal costs</strong> (like extra laundry) change at higher volumes.</p>
+                                        <p className="text-sm text-slate-600">Check if your <strong>marginal costs</strong> (like extra laundry) change at higher volumes.</p>
                                     </div>
                                 </div>
                             </CardContent>

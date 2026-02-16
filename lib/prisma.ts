@@ -14,13 +14,27 @@ const globalForPrisma = globalThis as unknown as {
  * and provides safe connection logic for production.
  */
 const createPrismaClient = (): PrismaClient => {
-    // Standard Vercel + Supabase/Neon connection strings
-    const url = process.env.POSTGRES_PRISMA_URL || process.env.DATABASE_URL;
+    // We prioritize DATABASE_URL if it looks like a pooler URL (port 6543)
+    // or fallback to POSTGRES_PRISMA_URL (Vercel's default for Postgres)
+    const dbUrl = process.env.DATABASE_URL || '';
+    const prismaUrl = process.env.POSTGRES_PRISMA_URL || '';
+
+    // Logic: If DATABASE_URL is explicitly set and contains ':6543' (Supabase Pooler), 
+    // it's likely what the user just updated, so we prioritize it over the legacy Vercel URL.
+    const url = dbUrl.includes(':6543') ? dbUrl : (prismaUrl || dbUrl);
 
     if (!url) {
-        console.error('CRITICAL: No database connection string found (DATABASE_URL or POSTGRES_PRISMA_URL)');
-        // Return a client that will fail on use, but not at module load time
+        console.error('CRITICAL: No database connection string found');
         return new PrismaClient();
+    }
+
+    // Diagnostic logging for production (masked)
+    if (process.env.NODE_ENV === 'production') {
+        const maskedUrl = url.replace(/:([^@]+)@/, ':****@').split('?')[0];
+        console.log(`[Prisma Init] Using connection: ${maskedUrl}`);
+        if (prismaUrl && dbUrl && prismaUrl !== dbUrl) {
+            console.warn(`[Prisma Init] Warning: Multiple DB URLs found. Prioritizing: ${maskedUrl}`);
+        }
     }
 
     try {
@@ -31,10 +45,12 @@ const createPrismaClient = (): PrismaClient => {
             const adapter = new PrismaLibSql(libsql);
             return new PrismaClient({ adapter });
         } else {
+            // Check for SSL requirement (Supabase Pooler usually needs SSL)
+            const connectionUrl = new URL(url);
             const pool = new Pool({
                 connectionString: url,
                 ssl: { rejectUnauthorized: false },
-                max: 1 // Single connection per serverless instance
+                max: 1
             });
             const adapter = new PrismaPg(pool);
             return new PrismaClient({ adapter });

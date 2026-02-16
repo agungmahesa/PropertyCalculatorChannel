@@ -10,12 +10,12 @@ interface ProfitCardProps {
 
 export default function ProfitCard({ title, amount, percentage, status }: ProfitCardProps) {
     return (
-        <Card className="flex flex-col justify-between h-full bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+        <Card className="flex flex-col justify-between h-full bg-white border-slate-200">
             <CardHeader className="pb-2">
-                <CardTitle className="text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">{title}</CardTitle>
+                <CardTitle className="text-xs font-medium text-slate-500 uppercase tracking-wider">{title}</CardTitle>
             </CardHeader>
             <CardContent>
-                <div className="text-2xl font-bold text-slate-900 dark:text-white">
+                <div className="text-2xl font-bold text-slate-900">
                     {new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(amount)}
                 </div>
                 {percentage !== undefined && (

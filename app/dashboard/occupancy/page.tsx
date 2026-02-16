@@ -15,17 +15,17 @@ export default function OccupancyPage() {
     const result = calculateOccupancy(totalRooms, bookedRooms, threshold);
 
     return (
-        <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+        <div className="min-h-screen bg-slate-50">
             <TopNav />
             <main className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold text-slate-900 dark:text-white">
+                        <h1 className="text-3xl font-bold text-slate-900">
                             Occupancy Alert
                         </h1>
-                        <p className="mt-1 text-slate-500 dark:text-slate-400">
+                        <p className="mt-1 text-slate-500">
                             Get pricing recommendations based on real-time occupancy rates
                         </p>
                     </div>
@@ -40,7 +40,7 @@ export default function OccupancyPage() {
                     <CardContent>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div className="space-y-2">
-                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                                <label className="block text-sm font-medium text-slate-700">
                                     Total Rooms
                                 </label>
                                 <Input
@@ -52,7 +52,7 @@ export default function OccupancyPage() {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                                <label className="block text-sm font-medium text-slate-700">
                                     Current Booked Rooms
                                 </label>
                                 <Input
@@ -65,7 +65,7 @@ export default function OccupancyPage() {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">
+                                <label className="block text-sm font-medium text-slate-700">
                                     Threshold (%)
                                 </label>
                                 <div className="relative">
@@ -91,28 +91,28 @@ export default function OccupancyPage() {
                         <div className={`h-2 w-full ${result.status === 'high' ? 'bg-emerald-500' : 'bg-amber-500'}`}></div>
                         <CardContent className="pt-8 pb-10 text-center">
                             <div className="flex justify-center mb-6">
-                                <div className={`p-4 rounded-full ${result.status === 'high' ? 'bg-emerald-100 dark:bg-emerald-900/30' : 'bg-amber-100 dark:bg-amber-900/30'}`}>
+                                <div className={`p-4 rounded-full ${result.status === 'high' ? 'bg-emerald-100' : 'bg-amber-100'}`}>
                                     {result.status === 'high' ? (
-                                        <CheckCircleIcon className="h-12 w-12 text-emerald-600 dark:text-emerald-400" />
+                                        <CheckCircleIcon className="h-12 w-12 text-emerald-600" />
                                     ) : (
-                                        <ExclamationTriangleIcon className="h-12 w-12 text-amber-600 dark:text-amber-400" />
+                                        <ExclamationTriangleIcon className="h-12 w-12 text-amber-600" />
                                     )}
                                 </div>
                             </div>
-                            <p className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+                            <p className="text-sm font-semibold uppercase tracking-wider text-slate-500 mb-2">
                                 Current Occupancy Rate
                             </p>
-                            <h2 className={`text-7xl font-black mb-6 ${result.status === 'high' ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}`}>
+                            <h2 className={`text-7xl font-black mb-6 ${result.status === 'high' ? 'text-emerald-600' : 'text-amber-600'}`}>
                                 {result.occupancyRate.toFixed(1)}%
                             </h2>
                             <div className="max-w-md mx-auto space-y-4">
-                                <div className="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-4 overflow-hidden border border-slate-200 dark:border-slate-700">
+                                <div className="w-full bg-slate-100 rounded-full h-4 overflow-hidden border border-slate-200">
                                     <div
                                         className={`h-full rounded-full transition-all duration-1000 ease-out ${result.status === 'high' ? 'bg-emerald-500' : 'bg-amber-500'}`}
                                         style={{ width: `${Math.min(result.occupancyRate, 100)}%` }}
                                     />
                                 </div>
-                                <div className="flex justify-between items-center text-sm font-medium text-slate-500 dark:text-slate-400 px-1">
+                                <div className="flex justify-between items-center text-sm font-medium text-slate-500 px-1">
                                     <span>{bookedRooms} Booked</span>
                                     <span>{totalRooms - bookedRooms} Available</span>
                                 </div>
@@ -144,7 +144,7 @@ export default function OccupancyPage() {
                                 <CardTitle className="text-base font-bold">📌 Business Logic</CardTitle>
                             </CardHeader>
                             <CardContent className="pt-0">
-                                <ul className="space-y-4 text-sm text-slate-600 dark:text-slate-400">
+                                <ul className="space-y-4 text-sm text-slate-600">
                                     <li className="flex gap-3">
                                         <div className="h-1.5 w-1.5 rounded-full bg-indigo-500 mt-1.5 flex-shrink-0"></div>
                                         <span>If occupancy is <strong>above {threshold}%</strong>, demand is strong - increase prices by <strong>5-10%</strong>.</span>

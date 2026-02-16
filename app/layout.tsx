@@ -19,10 +19,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning={true}>
+    <html lang="en">
       <body
         className={`${jakarta.variable} font-sans antialiased bg-slate-50 text-slate-900`}
-        suppressHydrationWarning={true}
       >
         {children}
       </body>

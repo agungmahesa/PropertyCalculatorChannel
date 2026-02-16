@@ -23,7 +23,7 @@ export default function CurrencyInput({ value, onChange, className = '', placeho
     return (
         <div className="relative">
             {label && (
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-200 mb-2">
+                <label className="block text-sm font-medium text-slate-700 mb-2">
                     {label}
                 </label>
             )}
