@@ -2,56 +2,53 @@ import { PrismaClient } from '@prisma/client';
 import { Pool, types } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
 
-// Core database initialization logic for Prisma 7
+// Parse PostgreSQL decimals as floats
+types.setTypeParser(1700, (val) => parseFloat(val));
+
 const globalForPrisma = globalThis as unknown as {
     prisma: PrismaClient | undefined;
 };
 
-// Ensure Decimals are parsed as floats for calculations
-types.setTypeParser(1700, (val) => parseFloat(val));
-
-const getPrisma = () => {
+/**
+ * Factory for creating a Prisma client that handles Vercel environment variables
+ * and provides safe connection logic for production.
+ */
+const createPrismaClient = (): PrismaClient => {
     // Standard Vercel + Supabase/Neon connection strings
     const url = process.env.POSTGRES_PRISMA_URL || process.env.DATABASE_URL;
 
     if (!url) {
-        console.error('CRITICAL: DATABASE_URL is not set. Database features will fail.');
+        console.error('CRITICAL: No database connection string found (DATABASE_URL or POSTGRES_PRISMA_URL)');
+        // Return a client that will fail on use, but not at module load time
         return new PrismaClient();
     }
 
-    console.log(`Initializing Prisma with provider: ${url.startsWith('postgresql') ? 'PostgreSQL' : 'SQLite/LibSQL'}`);
-
-    // SQLite/LibSQL path (Local development)
-    if (url.startsWith('file:') || url.startsWith('libsql:')) {
-        try {
+    try {
+        if (url.startsWith('file:') || url.startsWith('libsql:')) {
             const { createClient } = require('@libsql/client');
             const { PrismaLibSql } = require('@prisma/adapter-libsql');
             const libsql = createClient({ url });
             const adapter = new PrismaLibSql(libsql);
             return new PrismaClient({ adapter });
-        } catch (error) {
-            console.error('Failed to initialize LibSQL adapter:', error);
-            return new PrismaClient();
-        }
-    }
-
-    // PostgreSQL path (Production/Vercel)
-    else {
-        try {
+        } else {
             const pool = new Pool({
                 connectionString: url,
-                ssl: { rejectUnauthorized: false }, // Required for Supabase/Neon in production
-                max: 1 // Optimize for serverless cold starts and connection limits
+                ssl: { rejectUnauthorized: false },
+                max: 1 // Single connection per serverless instance
             });
             const adapter = new PrismaPg(pool);
             return new PrismaClient({ adapter });
-        } catch (error) {
-            console.error('Failed to initialize PostgreSQL adapter:', error);
-            return new PrismaClient();
         }
+    } catch (err) {
+        console.error('Failed to initialize Prisma Client adapter:', err);
+        return new PrismaClient();
     }
 };
 
-export const prisma = globalForPrisma.prisma ?? getPrisma();
+/**
+ * Safe proxy for Prisma that ensures we don't crash at module load time
+ * if the environment is not yet ready or configured.
+ */
+export const prisma = globalForPrisma.prisma ?? createPrismaClient();
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
