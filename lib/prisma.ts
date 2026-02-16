@@ -1,33 +1,54 @@
 import { PrismaClient } from '@prisma/client';
-import { PrismaLibSql } from '@prisma/adapter-libsql';
-import { Pool } from 'pg';
+import { Pool, types } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
 
+// Core database initialization logic for Prisma 7
 const globalForPrisma = globalThis as unknown as {
     prisma: PrismaClient | undefined;
 };
 
+// Ensure Decimals are parsed as floats for calculations
+types.setTypeParser(1700, (val) => parseFloat(val));
+
 const getPrisma = () => {
-    const url = process.env.DATABASE_URL;
+    // Standard Vercel + Supabase/Neon connection strings
+    const url = process.env.POSTGRES_PRISMA_URL || process.env.DATABASE_URL;
 
     if (!url) {
-        console.warn('DATABASE_URL is not set. Database features will fail.');
+        console.error('CRITICAL: DATABASE_URL is not set. Database features will fail.');
         return new PrismaClient();
     }
 
+    console.log(`Initializing Prisma with provider: ${url.startsWith('postgresql') ? 'PostgreSQL' : 'SQLite/LibSQL'}`);
+
+    // SQLite/LibSQL path (Local development)
     if (url.startsWith('file:') || url.startsWith('libsql:')) {
-        const { createClient } = require('@libsql/client');
-        const libsql = createClient({ url });
-        const adapter = new PrismaLibSql({ url });
-        return new PrismaClient({ adapter });
-    } else {
-        // PostgreSQL connection with SSL support for production (Supabase/Neon)
-        const pool = new Pool({
-            connectionString: url,
-            ssl: url.includes('localhost') ? false : { rejectUnauthorized: false }
-        });
-        const adapter = new PrismaPg(pool);
-        return new PrismaClient({ adapter });
+        try {
+            const { createClient } = require('@libsql/client');
+            const { PrismaLibSql } = require('@prisma/adapter-libsql');
+            const libsql = createClient({ url });
+            const adapter = new PrismaLibSql(libsql);
+            return new PrismaClient({ adapter });
+        } catch (error) {
+            console.error('Failed to initialize LibSQL adapter:', error);
+            return new PrismaClient();
+        }
+    }
+
+    // PostgreSQL path (Production/Vercel)
+    else {
+        try {
+            const pool = new Pool({
+                connectionString: url,
+                ssl: { rejectUnauthorized: false }, // Required for Supabase/Neon in production
+                max: 1 // Optimize for serverless cold starts and connection limits
+            });
+            const adapter = new PrismaPg(pool);
+            return new PrismaClient({ adapter });
+        } catch (error) {
+            console.error('Failed to initialize PostgreSQL adapter:', error);
+            return new PrismaClient();
+        }
     }
 };
 
