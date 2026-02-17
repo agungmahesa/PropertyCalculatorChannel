@@ -176,22 +176,22 @@ export default function PromoPage() {
 
                     {/* Right Side: Strategy and Tips */}
                     <div className="space-y-6">
-                        <Card className="bg-indigo-600 text-white border-0 shadow-xl overflow-hidden">
+                        <Card className="bg-indigo-50 text-slate-900 border border-indigo-100 shadow-sm overflow-hidden">
                             <div className="absolute top-0 right-0 p-4 opacity-10">
-                                <LightBulbIcon className="h-24 w-24" />
+                                <LightBulbIcon className="h-24 w-24 text-indigo-200" />
                             </div>
                             <CardHeader>
-                                <CardTitle className="text-white">Compensation Strategy</CardTitle>
+                                <CardTitle className="text-slate-900">Compensation Strategy</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-4">
-                                <p className="text-indigo-100 leading-relaxed">
+                                <p className="text-slate-700 leading-relaxed font-medium">
                                     To maintain the same total profit with this <strong>{discountPercentage}% discount</strong>, you need to sell:
                                 </p>
-                                <div className="p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
-                                    <div className="text-4xl font-black mb-1">+{result.additionalRoomsNeeded}</div>
-                                    <div className="text-sm font-medium uppercase tracking-wider text-indigo-200">Additional Room{result.additionalRoomsNeeded !== 1 ? 's' : ''}</div>
+                                <div className="p-6 bg-white/50 backdrop-blur-sm rounded-2xl border border-indigo-100">
+                                    <div className="text-4xl font-black mb-1 text-slate-900">+{result.additionalRoomsNeeded}</div>
+                                    <div className="text-sm font-bold uppercase tracking-wider text-indigo-600">Additional Room{result.additionalRoomsNeeded !== 1 ? 's' : ''}</div>
                                 </div>
-                                <p className="text-xs text-indigo-200 italic pt-2">
+                                <p className="text-xs text-slate-500 italic pt-2">
                                     Calculation: {formatIDR(result.profitDrop)} lost profit ÷ {formatIDR(result.discountedProfit)} unit profit.
                                 </p>
                             </CardContent>

@@ -122,17 +122,17 @@ export default function OccupancyPage() {
 
                     {/* Recommendation Card */}
                     <div className="space-y-6">
-                        <Card className="bg-indigo-600 text-white shadow-lg shadow-indigo-500/20 border-0">
+                        <Card className="bg-indigo-50 border-indigo-100 text-slate-900 shadow-sm border">
                             <CardHeader>
                                 <div className="flex items-center gap-3">
-                                    <div className="p-2 bg-white/10 rounded-lg">
-                                        <ChartBarIcon className="h-6 w-6 text-white" />
+                                    <div className="p-2 bg-indigo-100 rounded-lg">
+                                        <ChartBarIcon className="h-6 w-6 text-indigo-600" />
                                     </div>
-                                    <CardTitle className="text-white">Strategy</CardTitle>
+                                    <CardTitle className="text-slate-900">Strategy</CardTitle>
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                <p className="text-lg font-medium leading-relaxed">
+                                <p className="text-lg font-bold leading-relaxed text-slate-900">
                                     {result.recommendation}
                                 </p>
                             </CardContent>
