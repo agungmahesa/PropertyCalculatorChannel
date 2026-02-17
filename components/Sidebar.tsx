@@ -99,6 +99,22 @@ export default function Sidebar() {
                     </div>
                 </nav>
 
+                {/* Engagement CTA */}
+                <div className="px-4 py-4">
+                    <div className="bg-gradient-to-br from-indigo-500/10 to-purple-500/10 rounded-xl p-4 border border-indigo-500/20 backdrop-blur-sm">
+                        <p className="text-xs font-bold text-indigo-400 uppercase tracking-wider mb-2">Build your own</p>
+                        <p className="text-sm text-slate-300 leading-relaxed mb-3">
+                            Interested in a professional website like this?
+                        </p>
+                        <a
+                            href="mailto:agungmahesay@gmail.com"
+                            className="inline-flex items-center text-xs font-bold text-white hover:text-indigo-400 transition-colors"
+                        >
+                            agungmahesay@gmail.com
+                        </a>
+                    </div>
+                </div>
+
                 {/* User Profile */}
                 <div className="p-4 border-t border-slate-800 bg-slate-950/30">
                     <div className="flex items-center gap-3 px-2">
