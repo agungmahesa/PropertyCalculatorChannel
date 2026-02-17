@@ -256,15 +256,15 @@ export default function ComparisonPage() {
 
                     {/* Monthly Impact Summary */}
                     <div className="lg:col-span-1">
-                        <Card className="h-full bg-slate-900 border-slate-800">
+                        <Card className="h-full bg-white border-slate-200">
                             <CardHeader>
-                                <CardTitle className="text-white">Monthly Projection</CardTitle>
-                                <CardDescription className="text-slate-400 text-sm">Estimated impact based on {totalRooms} rooms at {occupancy}%</CardDescription>
+                                <CardTitle className="text-slate-900">Monthly Projection</CardTitle>
+                                <CardDescription className="text-slate-500 text-sm">Estimated impact based on {totalRooms} rooms at {occupancy}%</CardDescription>
                             </CardHeader>
                             <CardContent className="space-y-6">
-                                <div className="p-4 bg-slate-800/50 rounded-xl border border-slate-700">
-                                    <div className="text-slate-400 text-xs mb-1 uppercase tracking-wider font-semibold">Profit Difference / Room</div>
-                                    <div className={`text-2xl font-bold ${profitDifference >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                                <div className="p-4 bg-slate-50 rounded-xl border border-slate-100">
+                                    <div className="text-slate-500 text-xs mb-1 uppercase tracking-wider font-semibold">Profit Difference / Room</div>
+                                    <div className={`text-2xl font-bold ${profitDifference >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                                         {profitDifference >= 0 ? '+' : ''}{formatIDR(profitDifference)}
                                     </div>
                                     <div className={`text-xs mt-1 font-medium ${marginDifference >= 0 ? 'text-emerald-500' : 'text-rose-500'}`}>
@@ -273,18 +273,18 @@ export default function ComparisonPage() {
                                 </div>
 
                                 <div className="space-y-4 pt-4">
-                                    <div className="flex justify-between items-center text-slate-300">
-                                        <span className="text-sm text-slate-400">Active Period</span>
+                                    <div className="flex justify-between items-center text-slate-600">
+                                        <span className="text-sm text-slate-500">Active Period</span>
                                         <span className="font-semibold text-sm">30 Days</span>
                                     </div>
-                                    <div className="flex justify-between items-center text-slate-300">
-                                        <span className="text-sm text-slate-400">Avg Occupancy</span>
+                                    <div className="flex justify-between items-center text-slate-600">
+                                        <span className="text-sm text-slate-500">Avg Occupancy</span>
                                         <span className="font-semibold text-sm">{occupancy}%</span>
                                     </div>
 
-                                    <div className="pt-6 border-t border-slate-800">
-                                        <div className="text-slate-400 text-xs mb-2 uppercase tracking-wider font-bold">Total Monthly Impact</div>
-                                        <div className={`text-3xl font-black ${monthlyImpact >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                                    <div className="pt-6 border-t border-slate-100">
+                                        <div className="text-slate-500 text-xs mb-2 uppercase tracking-wider font-bold">Total Monthly Impact</div>
+                                        <div className={`text-3xl font-black ${monthlyImpact >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                                             {monthlyImpact >= 0 ? '+' : ''}{formatIDR(monthlyImpact)}
                                         </div>
                                     </div>

@@ -87,8 +87,8 @@ export default function OccupancyPage() {
                 {/* Status and Recommendation */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Occupancy Rate Display */}
-                    <Card className="lg:col-span-2 overflow-hidden border-0 shadow-lg">
-                        <div className={`h-2 w-full ${result.status === 'high' ? 'bg-emerald-500' : 'bg-amber-500'}`}></div>
+                    <Card className="lg:col-span-2 overflow-hidden border border-slate-200">
+                        <div className={`h-1.5 w-full ${result.status === 'high' ? 'bg-emerald-500' : 'bg-amber-500'}`}></div>
                         <CardContent className="pt-8 pb-10 text-center">
                             <div className="flex justify-center mb-6">
                                 <div className={`p-4 rounded-full ${result.status === 'high' ? 'bg-emerald-100' : 'bg-amber-100'}`}>
@@ -122,10 +122,10 @@ export default function OccupancyPage() {
 
                     {/* Recommendation Card */}
                     <div className="space-y-6">
-                        <Card className="bg-indigo-600 border-indigo-500 text-white shadow-xl shadow-indigo-500/20">
+                        <Card className="bg-indigo-600 text-white shadow-lg shadow-indigo-500/20 border-0">
                             <CardHeader>
                                 <div className="flex items-center gap-3">
-                                    <div className="p-2 bg-white/20 rounded-lg">
+                                    <div className="p-2 bg-white/10 rounded-lg">
                                         <ChartBarIcon className="h-6 w-6 text-white" />
                                     </div>
                                     <CardTitle className="text-white">Strategy</CardTitle>

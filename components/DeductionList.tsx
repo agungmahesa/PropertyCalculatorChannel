@@ -54,13 +54,13 @@ function SortableDeductionItem({ deduction, onChange, onDelete }: SortableItemPr
         <div
             ref={setNodeRef}
             style={style}
-            className={`flex items-center gap-3 p-3 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm transition-shadow ${isDragging ? 'shadow-lg border-indigo-500 ring-2 ring-indigo-500/20' : ''}`}
+            className={`flex items-center gap-3 p-3 bg-white rounded-lg border border-slate-200 shadow-sm transition-shadow ${isDragging ? 'shadow-lg border-indigo-500 ring-2 ring-indigo-500/20' : ''}`}
         >
             {/* Drag Handle */}
             <button
                 {...attributes}
                 {...listeners}
-                className="cursor-grab active:cursor-grabbing p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+                className="cursor-grab active:cursor-grabbing p-1 text-slate-400 hover:text-slate-600 transition-colors"
             >
                 <Bars2Icon className="h-4 w-4" />
             </button>
@@ -85,7 +85,7 @@ function SortableDeductionItem({ deduction, onChange, onDelete }: SortableItemPr
                     <select
                         value={deduction.type}
                         onChange={(e) => onChange(deduction.id, 'type', e.target.value)}
-                        className="w-full h-8 text-sm rounded-md border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 focus:ring-1 focus:ring-indigo-500"
+                        className="w-full h-8 text-sm rounded-md border-slate-300 bg-white focus:ring-1 focus:ring-indigo-500"
                     >
                         <option value="percentage">%</option>
                         <option value="fixed">Flat</option>
@@ -184,7 +184,7 @@ export default function DeductionList({ deductions, onChange }: DeductionListPro
             </DndContext>
 
             {deductions.length === 0 && (
-                <div className="text-center py-6 text-slate-500 text-sm italic border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl">
+                <div className="text-center py-6 text-slate-500 text-sm italic border-2 border-dashed border-slate-200 rounded-xl">
                     No deductions added.
                 </div>
             )}

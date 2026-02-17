@@ -83,7 +83,7 @@ export default function PromoPage() {
                     {/* Left Side: Comparison and Analysis */}
                     <div className="lg:col-span-2 space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <Card className="bg-slate-50 border-slate-200">
+                            <Card className="bg-white border-slate-200">
                                 <CardHeader className="pb-2">
                                     <span className="text-xs font-bold uppercase tracking-wider text-slate-500">Normal Pricing</span>
                                 </CardHeader>
@@ -98,13 +98,13 @@ export default function PromoPage() {
                                 </CardContent>
                             </Card>
 
-                            <Card className="bg-indigo-50 border-indigo-100">
+                            <Card className="bg-indigo-50 border-indigo-200">
                                 <CardHeader className="pb-2">
-                                    <span className="text-xs font-bold uppercase tracking-wider text-indigo-500">Discounted Pricing</span>
+                                    <span className="text-xs font-bold uppercase tracking-wider text-indigo-700">Discounted Pricing</span>
                                 </CardHeader>
                                 <CardContent>
-                                    <div className="text-3xl font-bold text-indigo-600 mb-2">{formatIDR(result.discountedPrice)}</div>
-                                    <div className="flex items-center gap-2 text-sm text-indigo-500 font-medium">
+                                    <div className="text-3xl font-bold text-indigo-700 mb-2">{formatIDR(result.discountedPrice)}</div>
+                                    <div className="flex items-center gap-2 text-sm text-indigo-600 font-medium">
                                         Profit: {formatIDR(result.discountedProfit)}
                                         <span className="px-1.5 py-0.5 bg-indigo-100 rounded text-xs font-bold">
                                             {formatPercentage((result.discountedProfit / result.discountedPrice) * 100, 1)}
